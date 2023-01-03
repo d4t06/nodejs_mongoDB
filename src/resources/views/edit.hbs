@@ -1,22 +1,21 @@
-{{#each rows}}
-<form method="POST" action="/products/update/{{this.id}}?_method=PUT">
-<h1>Chinh sua san pham</h1>
+
+<form method="POST" action="/products/update/{{product._id}}?_method=PUT">
+<h1>Chỉnh sửa sản phẩm</h1>
     <div class="form-group">
         <label for="name">Name:</label>
-        <input value="{{this.name}}" id="name" name="name" type="text">
+        <input value="{{product.name}}" id="name" name="name" type="text">
     </div>
     <div class="form-group">
         <label for="image">Image:</label>
-        <input value="{{this.image}}" id="image" name="image" type="text">
+        <input value="{{product.image}}" id="image" name="image" type="text">
     </div>
     <div class="form-group">
-        <label for="oldPrice">oldPrice:</label>
-        <input value="{{this.oldPrice}}" id="oldPrice" name="oldPrice" type="text">
+        <label for="old_price">oldPrice:</label>
+        <input value="{{product.old_price}}" id="old_price" name="old_price" type="text">
     </div>
     <div class="form-group">
-        <label for="curPrice">curPrice:</label>
-        <input value="{{this.curPrice}}" id="curPrice" name="curPrice" type="text">
+        <label for="cur_price">curPrice:</label>
+        <input value="{{product.cur_price}}" id="cur_price" name="cur_price" type="text">
     </div>
-    <button type="submit">Add</button>
+    <button type="submit">Sửa</button>
 </form>
-{{/each}}

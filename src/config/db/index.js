@@ -1,16 +1,16 @@
-const mysql = require("mysql2");
+const mongoose = require('mongoose');
 
-const pool = mysql.createPool({
-  connectionLimit: "10",
-  // host: "localhost",
-  user: "root",
-  // password: "",
-  database: "mydb",
+async function connect () {
+  try {
+    await mongoose.connect('mongodb://localhost:27017/hd_shop_dev')
+    // .then(() => console.log('Connected!'));
+    console.log("connected")
+  } catch (error) {
+    console.log("connect failure")
+    
+  }
 
-  host: process.env.DB_HOST,
-  // user: process.env.DB_USER,
-  password: "",
-  // database: process.env.DB_NAME,
-});
+  
+}
 
-module.exports = pool;
+module.exports = { connect }

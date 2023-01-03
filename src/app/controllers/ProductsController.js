@@ -1,18 +1,23 @@
 const pool = require("../../config/db");
+const Product = require("../models/Products")
+const util = require("../../util/mongoose");
+const { param } = require("express/lib/request");
 
 class ProductsController {
-  index(req, res) {
-    pool.getConnection((err, connection) => {
-      if (err) throw err;
-      console.log("connected as id" + connection.threadId);
-      //query(sql string, callback)
-      connection.query("SELECT * from packages", (err, rows) => {
-        connection.release();
-        // neu khong co loi thi gui du lieu cho client
-        if (!err) res.render("products", { rows });
-        else console.log(err);
-      });
-    });
+  index(req, res, next) {
+    // Product.find({}, (err, products) => {
+    //   // if (!err) res.json(products)
+    // if (!err) res.render("products", { products });
+    // else console.log(err);
+    // })
+    Product.find({})
+      .then(products => 
+        {
+          res.render("products", { products:  util.multipleConvert(products) })
+        }
+      )
+        
+      .catch(err => next(err))
   }
   show(req, res) {
     pool.getConnection((err, connection) => {
@@ -36,53 +41,29 @@ class ProductsController {
     res.render("create");
   }
   store(req, res) {
-    pool.getConnection((err, connection) => {
-      if (err) throw err;
-      console.log("connected as id" + connection.threadId);
-      //query(sql string, callback)
-      const params = req.body;
-      connection.query("INSERT INTO packages SET ?", params, (err, rows) => {
-        connection.release();
-        // neu khong co loi thi gui du lieu cho client
-        if (!err) res.redirect("/products");
-        else console.log(err);
-      });
-    });
+    const params = req.body
+    console.log(params)
+    const newProducs = new Product (params)
+    newProducs.save(function (err) {
+            if (!err) res.redirect("/products");
+      else console.log(err);
+
+      // res.json()
+    })
   }
-  edit(req, res) {
-    pool.getConnection((err, connection) => {
-      if (err) throw err;
-      console.log("connected as id" + connection.threadId);
-      //query(sql string, callback)
-      connection.query(
-        "SELECT * from packages WHERE id = ?",
-        [req.params.slug],
-        (err, rows) => {
-          connection.release();
-          // neu khong co loi thi gui du lieu cho client
-          if (!err) res.render("edit", { rows });
-          else console.log(err);
-        }
-      );
-    });
+  edit(req, res, next) {
+    Product.findOne({_id: req.params.slug})
+    .then((product) => {
+      res.render("edit", {product: util.convert(product)})
+    } )
+    .catch(err => next(err))
   }
-  update(req, res) {
-    pool.getConnection((err, connection) => {
-      if (err) throw err;
-      console.log("connected as id" + connection.threadId);
-      //query(sql string, callback)
-      const { name, image, oldPrice, curPrice } = req.body;
-      connection.query(
-        "UPDATE packages SET name = ?, image = ?, oldPrice = ?, curPrice = ? WHERE id = ?",
-        [name, image, oldPrice, curPrice, req.params.slug],
-        (err, rows) => {
-          connection.release();
-          // neu khong co loi thi gui du lieu cho client
-          if (!err) res.redirect("/products");
-          else console.log(err);
-        }
-      );
-    });
+  update(req, res, next) {
+
+    const params = req.body
+    Product.updateOne({_id : req.params.slug, }, params)
+      .then (() => res.redirect("/products"))
+      .catch(next)
   }
   find(req, res) {
     pool.getConnection((err, connection) => {
@@ -105,21 +86,10 @@ class ProductsController {
     });
   }
   delete(req, res) {
-    pool.getConnection((err, connection) => {
-      if (err) throw err;
-      //query(sql string, callback)
-      connection.query(
-        "DELETE from packages WHERE id = ?",
-        [req.params.slug],
-        (err, rows) => {
-          connection.release();
 
-          // neu khong co loi thi gui du lieu cho client
-          if (!err) res.redirect("/products");
-          else console.log(err);
-        }
-      );
-    });
+   Product.deleteOne({_id: req.params.slug})
+    .then(() => res.redirect("/products"))
+
   }
 }
 

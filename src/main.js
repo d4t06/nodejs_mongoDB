@@ -4,7 +4,9 @@ const app = express();
 const handlebars = require("express-handlebars");
 var methodOverride = require("method-override");
 const path = require("path");
+const db = require("./config/db")
 const port = 3000;
+
 
 const hbs = handlebars.create({
   defaultLayout: "main",
@@ -29,44 +31,8 @@ app.engine("hbs", hbs.engine);
 app.set("view engine", "hbs");
 app.set("views", viewsPath);
 
-// app.delete("/course/:id", (req, res) => {
-//   pool.getConnection((err, connection) => {
-//     if (err) throw err;
-//     console.log("connected as id" + connection.threadId);
-//     //query(sql string, callback)
-//     connection.query(
-//       "DELETE from beers WHERE id = ?",
-//       [req.params.id],
-//       (err, rows) => {
-//         connection.release();
-
-//         if (!err)
-//           res.send(
-//             "beer with the record id: " + [req.params.id] + "has been removed"
-//           );
-//         else console.log(err);
-//       }
-//     );
-//   });
-// });
-
-// app.post("/db", (req, res) => {
-//   pool.getConnection((err, connection) => {
-//     if (err) throw err;
-//     console.log("connected as id" + connection.threadId);
-
-//     const params = req.body;
-//     console.log(params);
-//     //query(sql string, callback)
-//     connection.query("INSERT INTO packages SET ?", params, (err, rows) => {
-//       connection.release();
-
-//       if (!err)
-//         res.send("item with the record name " + params.name + "has been added");
-//       else console.log(err);
-//     });
-//   });
-// });
+//connect db
+db.connect();
 
 //Routes
 route(app);
