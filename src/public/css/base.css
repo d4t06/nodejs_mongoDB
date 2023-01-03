@@ -1,0 +1,33 @@
+.container {
+  max-width: 900px;
+  /* max-width: 100%; */
+  margin: 0 auto;
+  padding-bottom: 20px;
+}
+.mt-15 {
+  margin-top: 15px;
+}
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: -4px;
+  margin-right: -4px;
+}
+.col {
+  padding-left: 4px;
+  padding-right: 4px;
+}
+.col-full {
+  width: 100%;
+}
+.col-4 {
+  max-width: 33.33%;
+  flex: 0 0 33.33%;
+}
+.col-2-4 {
+  max-width: 19%;
+  flex: 0 0 19%;
+}
+a {
+  text-decoration: none;
+}

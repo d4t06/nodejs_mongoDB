@@ -1,0 +1,34 @@
+
+
+{{#each rows}}
+<div class="col col-2-4">
+  <div  class="product-item">
+        <a href="/products/{{this.id}}" class="product-item_img" style="
+            background-image: url({{this.image}});
+          "></a>
+
+        <div class="product-item-body">
+          <h4 class="product-item_name">
+            {{this.name}}
+          </h4>
+          <div class="product-item_tag">
+            <span class="product-item_tag-special"
+              >#ShopDacBiet</span
+            >
+          </div>
+          <span class="product-item_price">
+            <span class="product-item_price--old">{{this.oldPrice}}</span>
+            <span class="product-item_price--current">{{this.curPrice}}
+          </span>
+
+        </div>
+        
+        <a href="/products/{{this.id}}/edit" class="edit-btn">sua</a>
+        <a href="/products/delete/{{this.id}}" class="delete-btn">xoa</a>
+  </div>
+</div>
+{{else}}
+<div class="col col-full mt-15" style="text-align: center;">
+<h2 > Khong co san pham nao, <a href="/products/create">Them san pham</a><h2/> 
+</div>
+{{/each}}
