@@ -154,3 +154,20 @@ button {
 .delete-btn {
   left: 45px;
 }
+/* Products */
+.product-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 30px;
+  padding: 4px 10px;
+  border-bottom: 1px solid #ccc;
+}
+.product-header a {
+  font-size: 1.6rem;
+  font-weight: 500;
+  color: #333;
+}
+.product-header a:hover {
+  text-decoration: underline;
+}

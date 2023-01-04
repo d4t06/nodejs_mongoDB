@@ -1,5 +1,9 @@
 
-
+<div class="product-header">
+  <h1>Tất cả sản phẩm</h1>
+  <a href="/products/trash">Thùng rác</a>
+</div>
+<div class="row">
 {{#each products}}
 <div class="col col-2-4">
   <div  class="product-item">
@@ -27,8 +31,12 @@
         <a href="/products/delete/{{this._id}}" class="delete-btn">xoa</a>
   </div>
 </div>
+
 {{else}}
-<div class="col col-full mt-15" style="text-align: center;">
-<h2 > Khong co san pham nao, <a href="/products/create">Them san pham</a><h2/> 
+<div class="col col-full mt-15" style="text-align: center; height:100% ">
+  <h2> Không có sản phẩm nào, <a href="/products/create">Thêm sản phẩm</a>
+  </h2> 
+    <img style=" width: 40%;" src="/images/not_found.png" alt="">
 </div>
 {{/each}}
+</div>
