@@ -29,8 +29,7 @@ html {
   display: flex;
   flex-direction: row;
 }
-.header-input input,
-button {
+.header-input input {
   padding: 10px;
 }
 .header-input input {
@@ -170,4 +169,38 @@ button {
 }
 .product-header a:hover {
   text-decoration: underline;
+}
+/* table */
+/* .products-table {
+  margin-top: 30px;
+} */
+
+.product-cta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #ccc;
+  /* color: #fff; */
+  width: 100%;
+  padding: 8px 14px;
+  margin-top: 30px;  
+  border-radius: 3px;
+}
+.checkbox-group {  
+  font-size: 1.6rem;
+}
+.checkbox-group input{
+  padding: 5px;
+}
+.select-input {
+  padding: 5px 10px;
+  margin-right: 10px;
+}
+.select-all-btn {
+  cursor: pointer;
+  padding: 5px 10px;
+  border-radius: 3px;
+  border: none;
+  color: #fff;
+  background-color: rgb(15, 97, 204);
 }

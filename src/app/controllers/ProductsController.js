@@ -1,4 +1,4 @@
-const Product = require("../models/Products")
+const Product = require("../models/Products");
 const util = require("../../util/mongoose");
 
 class ProductsController {
@@ -8,84 +8,79 @@ class ProductsController {
     // if (!err) res.render("products", { products });
     // else console.log(err);
     // })
-    Product.find({})
-      .then(products => {
-        res.render("products", { products: util.multipleConvert(products) })
-      }
-      )
+    Promise.all([Product.countDeleted(), Product.find({})])
 
-      .catch(err => next(err))
+      .then(([countDeleted, products]) => {
+        res.render("products", {
+          countDeleted,
+          products: util.multipleConvert(products),
+        });
+      })
+      .catch((err) => next(err));
+    // .catch(next)
   }
   trash(req, res) {
-    Product.findDeleted({})
-      .then(products => {
-        // res.render("products", { products: util.multipleConvert(products) })
-        res.json(products)
-      }
-      )
-
+    Product.findDeleted({}).then((products) => {
+      res.render("trash", { products: util.multipleConvert(products) });
+      // res.json(products)
+    });
   }
   show(req, res) {
     pool.getConnection((err, connection) => {
       if (err) throw err;
       console.log("connected as id" + connection.threadId);
       //query(sql string, callback)
-      connection.query(
-        "SELECT * from packages WHERE id = ?",
-        [req.params.slug],
-        (err, rows) => {
-          connection.release();
-          console.log(rows.name);
-          // neu khong co loi thi gui du lieu cho client
-          if (!err) res.render("products", { rows });
-          else console.log(err);
-        }
-      );
+      connection.query("SELECT * from packages WHERE id = ?", [req.params.slug], (err, rows) => {
+        connection.release();
+        console.log(rows.name);
+        // neu khong co loi thi gui du lieu cho client
+        if (!err) res.render("products", { rows });
+        else console.log(err);
+      });
     });
   }
   create(req, res) {
     res.render("create");
   }
   store(req, res) {
-    const params = req.body
-    console.log(params)
-    const newProducs = new Product(params)
+    const params = req.body;
+    console.log(params);
+    const newProducs = new Product(params);
     newProducs.save(function (err) {
       if (!err) res.redirect("/products");
       else console.log(err);
 
       // res.json()
-    })
+    });
   }
   edit(req, res, next) {
     Product.findOne({ _id: req.params.slug })
       .then((product) => {
-        res.render("edit", { product: util.convert(product) })
+        res.render("edit", { product: util.convert(product) });
       })
-      .catch(err => next(err))
+      .catch((err) => next(err));
   }
   update(req, res, next) {
-
-    const params = req.body
-    Product.updateOne({ _id: req.params.slug, }, params)
+    const params = req.body;
+    Product.updateOne({ _id: req.params.slug }, params)
       .then(() => res.redirect("/products"))
-      .catch(next)
+      .catch(next);
   }
   search(req, res) {
     const searchTerm = req.body.search;
-    Product.find({ name: new RegExp(searchTerm, 'i') })
-      .then(products => {
-        res.render("products", { products: util.multipleConvert(products) })
-        // res.json(products)
-      })
+    Product.find({ name: new RegExp(searchTerm, "i") }).then((products) => {
+      res.render("products", { products: util.multipleConvert(products) });
+      // res.json(products)
+    });
   }
   delete(req, res) {
     // Product.delete(())
-    Product.delete({ _id: req.params.slug })
-      .then((product) => {
-        res.redirect("/products")
-      })
-
+    Product.delete({ _id: req.params.slug }).then((product) => {
+      res.redirect("/products");
+    });
+  }
+  restore(req, res) {
+    Product.restore({ _id: req.params.slug }).then(() => res.redirect("back"));
   }
 }
 

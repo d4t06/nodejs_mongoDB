@@ -12,6 +12,6 @@ const Product = new Schema({
 });
 
 // add plugin
-Product.plugin(mongooseDelete,  {deleteAt: true, overrideMethods: 'all'})
+Product.plugin(mongooseDelete,  {deletedAt: true, overrideMethods: 'all'})
 
 module.exports = mongoose.model('Product', Product)

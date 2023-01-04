@@ -5,7 +5,8 @@
   "name": "Apple iPhone 11",
   "image": "https://cf.shopee.vn/file/19db3eddf43e8251af2ba9dd92fedffc_tn",
   "old_price": "16.000.000",
-  "cur_price": "10.730.000"
+  "cur_price": "10.730.000",
+  "deleted": false
 },{
   "_id": {
     "$oid": "63b3d342de3e49f6f320324c"
@@ -13,7 +14,13 @@
   "name": "Apple iPhone 12",
   "image": "https://cf.shopee.vn/file/77404ff511ce0585cca1f78f89b91c91_tn",
   "old_price": "21.000.000",
-  "cur_price": "16.300.000"
+  "cur_price": "16.300.000",
+  "deleted": false,
+  "deletedAt": {
+    "$date": {
+      "$numberLong": "1672824777296"
+    }
+  }
 },{
   "_id": {
     "$oid": "63b3e894f39e330428c95374"
@@ -21,7 +28,13 @@
   "name": "Apple Watch SE 40mm",
   "image": "https://cf.shopee.vn/file/f8ec3b6cd40e8f637116dd6b2c83aed4_tn",
   "old_price": "6.000.000",
-  "cur_price": "4.990.000"
+  "cur_price": "4.990.000",
+  "deleted": false,
+  "deletedAt": {
+    "$date": {
+      "$numberLong": "1672821609522"
+    }
+  }
 },{
   "_id": {
     "$oid": "63b3f093f4c750070bdf077b"
@@ -29,13 +42,25 @@
   "name": "Apple Watch Seri 3 (GPS)",
   "image": "https://cf.shopee.vn/file/218bf6a395307c2414171c7664c0bfb6_tn",
   "old_price": "6.990.000",
-  "cur_price": "4.990.000"
+  "cur_price": "4.990.000",
+  "deleted": false,
+  "deletedAt": {
+    "$date": {
+      "$numberLong": "1672821608090"
+    }
+  }
 },{
   "_id": {
     "$oid": "63b3f0b3f4c750070bdf077e"
   },
   "name": "Apple iPhone 13 Pro",
   "image": "https://cf.shopee.vn/file/9298e5dfabf929d0a3e76689be0e76fd_tn",
-  "old_price": "",
-  "cur_price": ""
+  "old_price": "25.000.000",
+  "cur_price": "18.490.000",
+  "deleted": false,
+  "deletedAt": {
+    "$date": {
+      "$numberLong": "1672821606404"
+    }
+  }
 }]
