@@ -109,7 +109,7 @@ html {
   line-height: 1.6rem;
   color: #ee4d2d;
 }
-.container form {
+.container .create-form {
   display: flex;
   width: 50%;
   flex-direction: column;
@@ -126,13 +126,15 @@ html {
   font-size: 2rem;
   display: block;
 }
-.container form button {
+.container .create-form, .edit-form button {
   width: 20%;
   cursor: pointer;
   border: none;
   background-color: rgb(68, 135, 68);
   color: #fff;
   font-size: 1.6rem;
+  margin-top: 10px;
+  border-radius: 3px;
   padding: 5px;
 }
 .delete-btn,
@@ -180,7 +182,6 @@ html {
   justify-content: space-between;
   align-items: center;
   background-color: #ccc;
-  /* color: #fff; */
   width: 100%;
   padding: 8px 14px;
   margin-top: 30px;  
@@ -193,14 +194,25 @@ html {
   padding: 5px;
 }
 .select-input {
-  padding: 5px 10px;
+  padding: 10px;
   margin-right: 10px;
 }
-.select-all-btn {
+.submit-btn-trash-form {
   cursor: pointer;
-  padding: 5px 10px;
+  padding:10px;
   border-radius: 3px;
   border: none;
   color: #fff;
-  background-color: rgb(15, 97, 204);
+  background-color: rgb(14, 103, 220);
+}
+.submit-btn-trash-form:not(:disabled):hover {
+  background-color: rgb(14, 73, 151); 
+}
+.submit-btn-trash-form:disabled {
+  opacity: .6;
+cursor: unset;
+}
+/* trash-from */
+.trash-form {
+  width: 100%;
 }

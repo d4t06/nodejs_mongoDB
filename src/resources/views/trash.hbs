@@ -3,7 +3,7 @@
   <a href="/products">Tất cả sản phẩm</a>
 </div>
 <div class="row">
-
+<form class="trash-form" method="POST" action="trash/handle-form-action">
 <div class="product-cta">
 
 <div class="checkbox-group">
@@ -11,25 +11,42 @@
     <label for="select-all">Chọn tất cả</label>
 </div>
 <div class="select-group">
-    <select id="select-input" class="select-input">
-        <option value="">---</option>
-        <option value="">Xóa</option>
-        <option value="">Khôi Phục</option>
+    <select id="select-input" class="select-input" name="action">
+        <option value="">-- Chọn một hành động --</option>
+        <option value="DELETE">Xóa</option>
+        <option value="RESTORE">Khôi Phục</option>
     </select>
-    <button class="select-all-btn">Thực Hiện</button>
+    <button class="submit-btn-trash-form" type="submit" disabled="disabled">Thực Hiện</button>
 </div>
 </div>
 
 <table class="products-table">
     <tr>
         <th>Chọn</th>
-        <th style="width: 60%">Tên sản phầm</th>
+        <th style="width: 45%">
+            Tên sản phầm
+             {{{sort _sort}}}
+        </th>   
+        <th>
+            Giá
+            {{{sort _sort}}}
+        </th>   
         <th colspan="2">Hành động</th>
     </tr>
     {{#each products}}
     <tr>
-        <td style="text-align: center;"><input type="checkbox" id="select-item" name="select-item"></td>
-        <td>{{this.name}}</td>
+        <td style="text-align: center;">
+            <input type="checkbox" 
+                id="{{this._id}}"
+                name="productIds" 
+                value="{{this._id}}">
+            </td>
+        <td>
+            <label for="{{this._id}}">
+            {{this.name}}
+            </label>
+        </td>
+        <td>{{moneyFormat this.cur_price}}</td>
         <td><a href="/products/force_delete/{{this._id}}">Xóa vĩnh viễn</a></td>
         <td><a href="/products/restore/{{this._id}}">khôi phục</a></td>
     </tr>
@@ -42,3 +59,4 @@
             </tr>
     {{/each}}
 </table>
+</form>

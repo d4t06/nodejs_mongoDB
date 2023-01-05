@@ -8,6 +8,7 @@ class ProductsController {
     // if (!err) res.render("products", { products });
     // else console.log(err);
     // })
+    
     Promise.all([Product.countDeleted(), Product.find({})])
 
       .then(([countDeleted, products]) => {
@@ -19,11 +20,28 @@ class ProductsController {
       .catch((err) => next(err));
     // .catch(next)
   }
-  trash(req, res) {
-    Product.findDeleted({}).then((products) => {
-      res.render("trash", { products: util.multipleConvert(products) });
-      // res.json(products)
-    });
+  trash(req, res, next) {
+    let productsQuery = Product.findDeleted({})
+ 
+    // thực hiện sort
+    if (req.query.hasOwnProperty("_sort")) {
+      productsQuery = productsQuery.sort({
+        [res.locals._sort.column] : res.locals._sort.type
+      })
+      // res.json(res.locals._sort)
+    }
+
+    Promise.all([productsQuery])
+    .then(([products]) => {
+      res.render("trash", { products: util.multipleConvert(products) })
+    })
+    .catch(err => next(err))
+
+
+    // Product.findDeleted({})
+    // .then((products) => {
+    //   res.render("trash", { products: util.multipleConvert(products) });
+    //  });
   }
   show(req, res) {
     pool.getConnection((err, connection) => {
@@ -81,6 +99,22 @@ class ProductsController {
   }
   restore(req, res) {
     Product.restore({ _id: req.params.slug }).then(() => res.redirect("back"));
+  }
+  handleFormAction(req, res, next) {
+    // res.json(req.body)
+    switch (req.body.action) {
+      case 'DELETE':
+        
+        // break;
+
+      case 'RESTORE':
+        Product.restore({ _id: {$in: req.body.productIds}}).then(() => res.redirect("back"));
+        break;
+    
+      default:
+        res.json({message: 'Action invalid!'})
+        break;
+    }
   }
 }
 

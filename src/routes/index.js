@@ -1,6 +1,5 @@
 // const Connection = require("mysql2/typings/mysql/lib/Connection");
 const Product = require("../app/models/Products")
-
 const newsRouter = require("./news");
 const siteRouter = require("./site");
 const productsRouter = require("./products");

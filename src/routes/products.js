@@ -4,6 +4,7 @@ const route = express.Router();
 
 route.get("/create", productsController.create);
 route.get("/trash", productsController.trash);
+route.post("/trash/handle-form-action", productsController.handleFormAction);
 route.post("/store", productsController.store);
 route.post("/find", productsController.search);
 route.get("/restore/:slug", productsController.restore);
