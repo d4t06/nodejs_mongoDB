@@ -62,7 +62,7 @@ class ProductsController {
   }
   store(req, res) {
     const params = req.body;
-    console.log(params);
+    // console.log(params);
     const newProducs = new Product(params);
     newProducs.save(function (err) {
       if (!err) res.redirect("/products");
