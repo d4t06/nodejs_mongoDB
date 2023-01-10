@@ -126,7 +126,7 @@ html {
   font-size: 2rem;
   display: block;
 }
-.container .create-form, .edit-form button {
+.container .edit-form button {
   width: 20%;
   cursor: pointer;
   border: none;

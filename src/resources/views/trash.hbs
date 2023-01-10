@@ -22,8 +22,9 @@
 
 <table class="products-table">
     <tr>
-        <th>Chọn</th>
-        <th style="width: 45%">
+        <th style="width: 5%">Chọn</th>
+        <th style="width: 5%">ID</th>
+        <th style="width: 40%">
             Tên sản phầm
              {{{sort 'name' _sort}}}
         </th>   
@@ -39,8 +40,10 @@
             <input type="checkbox" 
                 id="{{this._id}}"
                 name="productIds" 
-                value="{{this._id}}">
-            </td>
+                value="{{this._id}}"
+            >
+        </td>
+        <td>{{this._id}}</td>
         <td>
             <label for="{{this._id}}">
             {{this.name}}
@@ -53,7 +56,7 @@
     {{else}}
     {{!-- <img src="/images/not_found.png" alt=""> --}}
         <tr>
-            <td colspan="3" style="text-align: center; border: none; font-weight: 500">
+            <td colspan="5" style="text-align: center; border: none; font-weight: 500">
             Thùng rác trống<a href="/products">, Về danh sách sản phẩm</a>
             </td>
             </tr>

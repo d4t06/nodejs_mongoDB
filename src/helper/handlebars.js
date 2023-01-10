@@ -1,3 +1,4 @@
+const Handlebars = require("handlebars")
 module.exports = {
     moneyFormat: (string) => {
       const formater = new Intl.NumberFormat('en-US', 
@@ -6,9 +7,7 @@ module.exports = {
       return formater.format(string);
     },
     sort: (field, local_sort) => {
-        // console.log(local_sort.enable, local_sort.column, local_sort.type);
-        let sortType = field === local_sort.column ?  local_sort.type : "default"
-        // console.log(sortType)
+      let sortType = field === local_sort.column ?  local_sort.type : "default"
       const icons = {
         default: 'funnel',
         asc: 'arrow-down',
@@ -23,10 +22,14 @@ module.exports = {
       const icon = icons[sortType]
       const type = types[sortType]
 
+      // safe string
+      const href = Handlebars.escapeExpression(`?_sort&column=${field}&type=${type}`) 
 
-      return `<a href="?_sort&column=${field}&type=${type}">
+      const output = `<a href="${href}">
       <ion-icon name="${icon}-outline"></ion-icon>
       </a>`
+
+      return new Handlebars.SafeString(output)
 
     }
   }

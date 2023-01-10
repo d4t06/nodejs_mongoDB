@@ -3,12 +3,7 @@ const util = require("../../util/mongoose");
 
 class ProductsController {
   index(req, res, next) {
-    // Product.find({}, (err, products) => {
-    //   // if (!err) res.json(products)
-    // if (!err) res.render("products", { products });
-    // else console.log(err);
-    // })
-    
+
     Promise.all([Product.countDeleted(), Product.find({})])
 
       .then(([countDeleted, products]) => {
@@ -18,31 +13,22 @@ class ProductsController {
         });
       })
       .catch((err) => next(err));
-    // .catch(next)
   }
-  trash(req, res, next) {
-    let productsQuery = Product.findDeleted({})
- 
-    // thực hiện sort
-    if (req.query.hasOwnProperty("_sort")) {
-      productsQuery = productsQuery.sort({
-        [res.locals._sort.column] : res.locals._sort.type
-      })
-      // res.json(res.locals._sort)
-    }
 
-    Promise.all([productsQuery])
+  trash(req, res, next) { 
+    Promise.all([Product.findDeleted({}).handleSort(req, res)])
     .then(([products]) => {
       res.render("trash", { products: util.multipleConvert(products) })
     })
     .catch(err => next(err))
-
-
-    // Product.findDeleted({})
-    // .then((products) => {
-    //   res.render("trash", { products: util.multipleConvert(products) });
-    //  });
+    
+    // Product.findDeleted({}).sortable(req)
+    //  .then(products => {
+    //   res.render("trash", { products: util.multipleConvert(products) })
+    //  })
+    //  .catch (err => next(err))
   }
+
   show(req, res) {
     pool.getConnection((err, connection) => {
       if (err) throw err;
@@ -62,7 +48,6 @@ class ProductsController {
   }
   store(req, res) {
     const params = req.body;
-    // console.log(params);
     const newProducs = new Product(params);
     newProducs.save(function (err) {
       if (!err) res.redirect("/products");
