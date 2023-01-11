@@ -4,11 +4,16 @@ const util = require("../../util/mongoose");
 class ProductsController {
   index(req, res, next) {
 
-    Promise.all([Product.countDeleted(), Product.find({})])
+    Promise.all([Product.countDeleted(), Product.find({}).count(), Product.find({}).handlePage(res)])
 
-      .then(([countDeleted, products]) => {
+      .then(([countDeleted, DocCount, products]) => {
+
+        const totalPage = Math.ceil(DocCount / res.locals._page.pageSize)
+        // console.log(totalPage);
+
         res.render("products", {
           countDeleted,
+          totalPage,
           products: util.multipleConvert(products),
         });
       })

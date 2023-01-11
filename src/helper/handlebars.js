@@ -32,11 +32,16 @@ module.exports = {
       return new Handlebars.SafeString(output)
 
     },
-    pagination: (local_page) => {
+    renderPageNumber: (totalPage, _page) => {
+      const activePageType = `
+        font-weight: 600;
+        color : #fff;
+        background-color: #333;
+      `
       let html = "";
-      for (let i = 1; i <= local_page.totalPage; i++) {
+      for (let i = 1; i <= totalPage; i++) {
         html += `<li class="pagination-item">
-        <a class="pagination-item_link" href="/products?_page=${i}">${i}</a>
+        <a style="${i == _page.curPage ? activePageType : ''}" class="pagination-item_link" href="/products?_page=${i}">${i}</a>
         </li>`
       }
       return html;      

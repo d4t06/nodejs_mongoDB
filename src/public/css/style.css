@@ -235,7 +235,9 @@ cursor: unset;
 .pagination-item_link {
   /* height: 100%; */
   padding: 10px 15px;
+  border-radius: 3px;
   font-size: 2rem;
   text-decoration: none;
   color: #333;
+  margin: 0 10px;
 }

@@ -23,12 +23,24 @@ const ProductSchema = new Schema({
 //custom query helper
   // không được viết trùng tên với tên phương thức của query 
 ProductSchema.query.handleSort = function (req, res) {
-  // console.log(res.locals._sort)
+  // nếu bật chức năng sort
   if (res.locals._sort.enable) {
     return this.sort({
       [res.locals._sort.column] : res.locals._sort.type
     })
   }
+  // console.log(this)
+  return this;
+}
+
+ProductSchema.query.handlePage = function (res) {
+  const pageSize = res.locals._page.pageSize
+  const skipCount = (res.locals._page.curPage - 1) * pageSize
+
+  //thực hiện phân dữ liệu
+  this.skip(skipCount)
+  this.limit(pageSize)
+
   return this;
 }
 
