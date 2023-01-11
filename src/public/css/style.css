@@ -80,7 +80,7 @@ html {
 }
 .product-item_tag {
   display: block;
-  /* margin-top: 20px; */
+  margin-top: 10px;
 }
 .product-item_tag-special {
   padding: 0.5px 2px;
@@ -215,4 +215,27 @@ cursor: unset;
 /* trash-from */
 .trash-form {
   width: 100%;
+}
+/* pagination */
+.pagination {
+  /* height: 30px; */
+  margin-top: 30px;
+  text-align: center;
+}
+.pagination-list {
+  /* height: 100%; */
+  text-align: center;
+}
+.pagination-item {
+  /* height: 100%; */
+  display: inline-block;
+  list-style: none;
+  /* text-align: center; */
+}
+.pagination-item_link {
+  /* height: 100%; */
+  padding: 10px 15px;
+  font-size: 2rem;
+  text-decoration: none;
+  color: #333;
 }

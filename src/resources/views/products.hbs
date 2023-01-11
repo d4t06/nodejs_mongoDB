@@ -30,7 +30,6 @@
         <a href="/products/delete/{{this._id}}" class="delete-btn">xoa</a>
   </div>
 </div>
-
 {{else}}
 <div class="col col-full mt-15" style="text-align: center; height:100% ">
   <h2> Không có sản phẩm nào, <a href="/products/create">Thêm sản phẩm</a>
@@ -38,4 +37,16 @@
     <img style=" width: 40%;" src="/images/not_found.png" alt="">
 </div>
 {{/each}}
+</div>
+<div class="pagination">
+  <ul class="pagination-list">
+    {{!-- {{#each _page}} --}}
+    {{{pagination _page}}}
+    
+    {{!-- <li class="pagination-item"><a class="pagination-item_link" href="#"><ion-icon name="chevron-back-outline"></ion-icon></a></li>
+    <li class="pagination-item"><a class="pagination-item_link" href="#">1</a></li>
+    <li class="pagination-item"><a class="pagination-item_link" href="#">2</a></li>
+    <li class="pagination-item"><a class="pagination-item_link" href="#">3</a></li>
+    <li class="pagination-item"><a class="pagination-item_link" href="#"><ion-icon name="chevron-forward-outline"></ion-icon></a></li> --}}
+  </ul>
 </div>

@@ -5,7 +5,8 @@ const handlebars = require("express-handlebars");
 var methodOverride = require("method-override");
 const path = require("path");
 const db = require("./config/db")
-const SortMiddleware = require('./app/middlewares/SortMiddleware')
+const SortMiddleware = require('./app/middlewares/SortMiddleware');
+const paginationMiddleware = require("./app/middlewares/paginationMiddleware");
 
 const port = 3000;
 
@@ -23,6 +24,7 @@ const viewsPath = path.join(__dirname, "/resources/views");
 // use custom middleware
 
 app.use(SortMiddleware)
+app.use(paginationMiddleware)
 
 //static file
 app.use(express.static(path.join(__dirname, "public")));

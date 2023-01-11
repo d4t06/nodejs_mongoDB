@@ -31,5 +31,14 @@ module.exports = {
 
       return new Handlebars.SafeString(output)
 
+    },
+    pagination: (local_page) => {
+      let html = "";
+      for (let i = 1; i <= local_page.totalPage; i++) {
+        html += `<li class="pagination-item">
+        <a class="pagination-item_link" href="/products?_page=${i}">${i}</a>
+        </li>`
+      }
+      return html;      
     }
   }
