@@ -11,7 +11,7 @@ route.get("/restore/:slug", productsController.restore);
 route.put("/update/:slug", productsController.update);
 route.get("/delete/:slug", productsController.delete);
 route.get("/:slug/edit", productsController.edit);
-route.get("/:slug", productsController.show);
+route.get("/private/:token", productsController.private, productsController.next);
 route.get("/", productsController.index);
 
 module.exports = route;
