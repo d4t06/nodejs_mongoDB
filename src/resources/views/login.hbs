@@ -9,5 +9,8 @@
         <label for="image">Password</label>
         <input value="{{product.image}}" id="password" name="password" type="text">
     </div>
+    {{#if message}}
+    <span class="messgae-container">{{message}}</span>
+    {{/if}}
     <button class="login-form-btn" type="submit">Đăng nhập</button>
 </form>

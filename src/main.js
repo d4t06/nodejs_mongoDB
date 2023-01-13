@@ -2,8 +2,11 @@ const express = require("express");
 const route = require("./routes");
 const app = express();
 const handlebars = require("express-handlebars");
-var methodOverride = require("method-override");
+const methodOverride = require("method-override");
 const path = require("path");
+const cookieParser = require('cookie-parser');
+const session = require("express-session");
+// const dotenv = require('dotenv')
 const db = require("./config/db")
 const SortMiddleware = require('./app/middlewares/SortMiddleware');
 const paginationMiddleware = require("./app/middlewares/paginationMiddleware");
@@ -20,14 +23,21 @@ const hbs = handlebars.create({
 });
 
 const viewsPath = path.join(__dirname, "/resources/views");
-
+require('dotenv').config()
+// use sessions
+app.use(session({
+  secret: "process.env.SESSION_SECRET",
+  resave: false,
+  saveUninitialized: false
+}))
 // use custom middleware
-
 app.use(SortMiddleware)
 app.use(paginationMiddleware)
 
 //static file
 app.use(express.static(path.join(__dirname, "public")));
+// use cookies parser
+app.use(cookieParser());
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));

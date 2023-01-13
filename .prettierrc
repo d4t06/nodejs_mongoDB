@@ -1,4 +1,4 @@
 {
-    "editor.formatOnSave": true,
-    "tabWidth": 3
+    "tabWidth": 3,
+    "printWidth": 120
   }

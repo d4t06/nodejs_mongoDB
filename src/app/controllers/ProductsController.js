@@ -1,6 +1,4 @@
 const Product = require("../models/Products");
-const Accounts = require("../models/Accounts");
-const jwt = require("jsonwebtoken");
 const util = require("../../util/mongoose");
 
 class ProductsController {
@@ -23,22 +21,6 @@ class ProductsController {
          })
          .catch((err) => next(err));
    }
-   private(req, res, next) {
-      try {
-         const token = req.params.token;
-         const result = jwt.verify(token, "mk");
-         console.log(result);
-         if (result) {
-            next();
-         }
-      } catch (error) {
-         return res.redirect("/login");
-      }
-   }
-   next(req, res, next) {
-      res.render("home")
-   }
-
    trash(req, res, next) {
       Promise.all([Product.findDeleted({}).handleSort(req, res)])
          .then(([products]) => {

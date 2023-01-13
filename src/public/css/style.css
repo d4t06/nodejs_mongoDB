@@ -245,6 +245,10 @@ cursor: unset;
 .login-form-btn:hover {
   background-color: rgb(41, 110, 58);
 }
+.messgae-container {
+  font-size: 1.6rem;
+  color: red;
+}
 /* pagination */
 .pagination {
   /* height: 30px; */

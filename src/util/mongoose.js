@@ -4,5 +4,5 @@ module.exports = {
     },
     multipleConvert: function (data) {
         return data.map(product => product.toObject())
-    }
+    },
 }
