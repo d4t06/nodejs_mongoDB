@@ -1,0 +1,30 @@
+<div class="header">
+        <div class="nav">
+          <a href="/">Home</a>
+          <a href="/products">Products</a>
+          <a href="/products/create">Create</a>
+          {{#if _isLogin}}
+          <a class="logout-btn" href="/logout">Logout</a>
+          {{else}}
+          <a href="/login">Login</a>
+          {{/if}}
+        </div>
+        {{!-- <form class="header-input" method="POST" action="/products/find">
+          <input
+            id="search"
+            name="search"
+            autocomplete="off"
+          />
+          <button type="submit">Search</button>
+        </form> --}}
+        
+        <div class="image-frame">
+        {{#if _isLogin}}
+          <img class="user-image" src="{{_isLogin.photos}}" alt="">        
+          {{else}}
+          <img class="user-image" src="/images/avatar1.jpeg" alt="">        
+          {{/if}}
+        </div>
+
+        
+</div>

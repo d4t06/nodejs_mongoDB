@@ -6,7 +6,7 @@ const authenticateMiddleware = require('../app/middlewares/authenticateMiddlewar
 
 
 router.get("/", loginController.index)
-router.post("/", loginController.login)
+router.post("/", loginController.passport)
 
 
 module.exports = router

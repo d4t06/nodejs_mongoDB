@@ -27,32 +27,13 @@
   <body>
     <div class="app">
 
-      <div class="header">
-        <div class="nav">
-          <a href="/">Home</a>
-          <a href="/products">Products</a>
-          <a href="/products/create">Create</a>
-          <a href="/login">Login</a>
-          <a href="/logout">Logout</a>
-        </div>
-        <form class="header-input" method="POST" action="/products/find">
-          <input
-            id="search"
-            name="search"
-            type="text"
-            placeholder="Search..."
-            autocomplete="off"
-          />
-          <button type="submit">Search</button>
-        </form>
-      </div>
+      {{!-- header --}}
+      {{> header}}
+
       <div class="container">
-
-
           {{{body}}}
       </div>
 
     </div>
-
   </body>
 </html>

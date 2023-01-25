@@ -9,6 +9,7 @@ html {
 }
 .header {
   height: 60px;
+  padding: 0 20px;
   background-color: #333;
   display: flex;
   justify-content: space-between;
@@ -48,6 +49,16 @@ html {
 }
 .header-input button:hover {
   background-color: rgb(84, 148, 84);
+}
+.header .image-frame {
+  width: 44px;
+  height: 44px;
+}
+.header .user-image {
+  width: 100%;
+  border-radius: 50%;
+  object-fit: contain;
+  object-position: center;
 }
 .product-item {
   display: flex;
@@ -249,6 +260,20 @@ cursor: unset;
   font-size: 1.6rem;
   color: red;
 }
+.login-with {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.login-option {
+  border-radius: 4px;
+  font-size: 1.6rem;
+  padding: 5px 10px;
+  background-color: #ccc;
+}
+.login-option + .login-option {
+  margin-left: 15px;
+}
 /* pagination */
 .pagination {
   /* height: 30px; */
@@ -274,3 +299,4 @@ cursor: unset;
   color: #333;
   margin: 0 10px;
 }
+

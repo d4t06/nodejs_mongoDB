@@ -4,6 +4,8 @@ const productItemCheckbox = $('input[name="productIds"]');
 const actionSelect = $('select[name="action"]')
 const submitBtnTrashForm = $('.submit-btn-trash-form')
 const trashForm = $('.trash-form')
+const logoutBtn = $('.logout-btn');
+// console.log(logoutBtn)
 
 console.log(submitBtnTrashForm);
 
@@ -44,29 +46,21 @@ actionSelect.change(function() {
 const handleSubmitBtnTrashForm = function () {
   const selectedCount = $('input[name="productIds"]:checked').length
   const actionSelect = $('select[name="action"]')
-  // console.log(selectedCount);
+
   if (selectedCount > 0 && actionSelect.prop('value') !== '') {
     submitBtnTrashForm.attr('disabled', false)
   } 
-  // else if (actionSelect.prop("value") === '') {
-  //   actionSelect.first().focus()
-  //   e.preventDefault();
-
-  // }
   else {
     submitBtnTrashForm.attr('disabled', true)
 
   }
 }
 
-//validator form
-// trashForm.on('submit', function (e) {
-//   const actionSelect = $('select[name="action"]')
-//   actionSelect.focus()
-//   // console.log(actionSelect.prop('value'));
-//   if (actionSelect.prop('value') === '') {
-//     actionSelect.focus()
-//     e.preventDefault()
-//   }
-// }
-// )
+logoutBtn.click(function (e) {
+  // console.log('click')
+  if (!window.confirm("Bạn muốn đăng xuất ?")) {
+    e.preventDefault()
+  } else return;
+
+})
+
