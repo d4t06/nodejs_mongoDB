@@ -3,8 +3,8 @@
         font-size: 1.5rem;
     }
 </style>
-<form class="login-form" method="POST" action="/login">
-<h1>Đăng nhập</h1>
+<form class="login-form" method="POST" action="/register">
+<h1>Đăng ký</h1>
     <div class="form-group">
         <label for="name">Username</label>
         <input value="{{product.name}}" id="username" name="username" type="text">
@@ -13,10 +13,13 @@
         <label for="image">Password</label>
         <input value="{{product.image}}" id="password" name="password" type="text">
     </div>
+    {{!-- <div class="form-group">
+        <label for="image">Confirm Password</label>
+        <input value="{{product.image}}" id="password" name="password" type="text">
+    </div> --}}
     {{#if message}}
     <span class="messgae-container">{{message}}</span>
     {{/if}}
-    
     <div class="login-with">
         <a href="/auth/facebook" class="login-facebook login-option">
             Facebook
@@ -25,9 +28,8 @@
             Google
         </a>
     </div>
-    
-    <button class="login-form-btn" type="submit">Đăng nhập</button>
-    <span class="register-text">Chưa có tài khoản 
-        <a href="/register">Đăng ký ngay</a>
+    <button class="login-form-btn" type="submit">Đăng ký</button>
+    <span class="register-text">Đã có tài khoản 
+        <a href="/login">Đăng nhập ngay</a>
     </span>
 </form>

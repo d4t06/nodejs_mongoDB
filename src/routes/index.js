@@ -3,8 +3,10 @@ const Account = require("../app/models/Accounts")
 //router
 const authRouter = require("./auth")
 const newsRouter = require("./news");
+const regiserRouter = require("./register")
 const loginRouter = require("./login");
 const siteRouter = require("./site");
+// controller
 const productsRouter = require("./products");
 const loginController = require("../app/controllers/LoginController");
 //middleWare
@@ -18,6 +20,8 @@ const route = function (app) {
    })
 
    app.get("/logout",authMiddleware.logoutHandle, loginController.logout);
+
+   app.use("/register",authMiddleware.loginHandle, regiserRouter)
    
    app.use("/login" ,authMiddleware.loginHandle, loginRouter);
 
