@@ -1,6 +1,7 @@
 // model
 const Account = require("../app/models/Accounts")
 //router
+const apiRouter = require("./api")
 const authRouter = require("./auth")
 const newsRouter = require("./news");
 const regiserRouter = require("./register")
@@ -13,12 +14,15 @@ const loginController = require("../app/controllers/LoginController");
 const authMiddleware = require("../app/middlewares/authenticateMiddleware");
 
 const route = function (app) {
+   // test
+   app.use("/api", apiRouter)
+
    app.get("/users", (req, res) => {
       Account.find({})
       .then(data => res.json(data))
       .catch(err => res.status(500).json(err))
    })
-
+   
    app.get("/logout",authMiddleware.logoutHandle, loginController.logout);
 
    app.use("/register",authMiddleware.loginHandle, regiserRouter)
@@ -29,7 +33,7 @@ const route = function (app) {
 
    app.use("/news", authMiddleware.isLogined, newsRouter);
 
-   app.use("/products", authMiddleware.isLogined, productsRouter);
+   app.use("/products",authMiddleware.isLogined, productsRouter);
 
    app.use("/",authMiddleware.isLogined, siteRouter);
 

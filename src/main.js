@@ -10,6 +10,7 @@ const port = process.env.PORT || 3000;
 
 const express = require("express");
 const route = require("./routes");
+const cors = require('cors')
 const app = express();
 const handlebars = require("express-handlebars");
 const methodOverride = require("method-override");
@@ -31,21 +32,28 @@ const hbs = handlebars.create({
   helpers: require('./helper/handlebars')
 });
 
+// config path
 const viewsPath = path.join(__dirname, "/resources/views");
+
 // use sessions
 app.use(session({
   secret: "process.env.SESSION_SECRET",
   resave: false,
   saveUninitialized: false
 }))
+
 // use custom middleware
 app.use(SortMiddleware)
 app.use(paginationMiddleware)
 
 //static file
 app.use(express.static(path.join(__dirname, "public")));
+
 // use cookies parser
 app.use(cookieParser());
+
+// allow cors
+app.use(cors())
 
 //user passport
 app.use(passport.initialize())
