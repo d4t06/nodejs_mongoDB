@@ -7,13 +7,13 @@ module.exports = {
          // console.log({
          //    status: req.session.isLogin,
          // });
-         const {displayName, photos} = req.session.isLogin
+         const { displayName, photos } = req.session.isLogin;
          res.locals._isLogin = {
-            status : true,
+            status: true,
             displayName,
             photos,
-         }
-         console.log(res.locals._isLogin.photos[0].value)
+         };
+         console.log(res.locals._isLogin);
          next();
       } else {
          res.redirect("/login");

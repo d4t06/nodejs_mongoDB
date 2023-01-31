@@ -3,7 +3,7 @@ if (process.env.NODE_ENV !== "production") {
   require('dotenv').config()
 }
 // database
-const db = require("./config/db")
+ require("./config/db")
 
 //port
 const port = process.env.PORT || 3000;
@@ -60,9 +60,6 @@ app.use(methodOverride("_method"));
 app.engine("hbs", hbs.engine);
 app.set("view engine", "hbs");
 app.set("views", viewsPath);
-
-//connect db
-db.connect();
 
 //Routes
 route(app);

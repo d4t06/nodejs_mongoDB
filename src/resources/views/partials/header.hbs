@@ -1,3 +1,15 @@
+<style>
+  .user-cta {
+    height: 100%;
+    display: flex;
+    align-items: center;
+  }
+  .display-name{
+    color: #fff;
+    margin-right: 15px;
+  }
+</style>
+
 <div class="header">
         <div class="nav">
           <a href="/">Home</a>
@@ -17,13 +29,20 @@
           />
           <button type="submit">Search</button>
         </form> --}}
-        
-        <div class="image-frame">
+        <div class="user-cta">
+
+          {{#if _isLogin}}
+          <h2 class="display-name">{{_isLogin.displayName}}</h2>
+          {{/if}}
+
+          <div class="image-frame">
         {{#if _isLogin}}
           <img class="user-image" src="{{_isLogin.photos}}" alt="">        
           {{else}}
           <img class="user-image" src="/images/avatar1.jpeg" alt="">        
           {{/if}}
         </div>
-
+        </div>
+        
+        
 </div>
