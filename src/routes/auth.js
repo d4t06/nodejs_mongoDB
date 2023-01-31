@@ -19,8 +19,8 @@ passport.deserializeUser(function(user, done) {
 passport.use(new FacebookStrategy({
     clientID: "1584980145346361",
     clientSecret: "ce34fc4c4f3919f1b240a3ab23525c41",
-    callbackURL: "https://4604-2402-800-6342-806e-3e36-d49f-69cc-5d10.ap.ngrok.io/auth/facebook/callback",
-    profileFields: ['id', 'displayName', 'photos'],
+    callbackURL: "https://9597-2402-800-6342-e405-2923-f28e-a137-d68.ap.ngrok.io/auth/facebook/callback",
+    profileFields: ['id', 'displayName', 'photos',],
   },
   function(accessToken, refreshToken, profile, done) {
     console.log(profile)

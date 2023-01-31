@@ -13,7 +13,7 @@ module.exports = {
             displayName,
             photos,
          }
-         console.log(res.locals._isLogin)
+         console.log(res.locals._isLogin.photos[0].value)
          next();
       } else {
          res.redirect("/login");
