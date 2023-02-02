@@ -8,7 +8,7 @@
 <div class="col col-2-4">
   <div  class="product-item">
         <a href="/products/{{this._id}}" class="product-item_img" style="
-            background-image: url({{this.image}});
+            background-image: url('{{this.image}}');
           "></a>
 
         <div class="product-item-body">
@@ -16,18 +16,20 @@
             {{this.name}}
           </h4>
           <div class="product-item_tag">
+            {{#each this.special}}
             <span class="product-item_tag-special"
-              >#ShopDacBiet</span
+              >{{this}}</span
             >
+            {{/each}}
           </div>
           <span class="product-item_price">
-            <span class="product-item_price--old">{{moneyFormat this.old_price}}</span>
-            <span class="product-item_price--current">{{moneyFormat this.cur_price}}</span>
+            <p class="product-item_price--old">{{moneyFormat this.old_price}}</p>
+            <p class="product-item_price--current">{{moneyFormat this.cur_price}}</p>
 
         </div>
         
-        <a href="/products/{{this._id}}/edit" class="edit-btn">sua</a>
-        <a href="/products/delete/{{this._id}}" class="delete-btn">xoa</a>
+        {{!-- <a href="/products/{{this._id}}/edit" class="edit-btn">sua</a>
+        <a href="/products/delete/{{this._id}}" class="delete-btn">xoa</a> --}}
   </div>
 </div>
 {{else}}
