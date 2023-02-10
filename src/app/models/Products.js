@@ -8,10 +8,18 @@ const Schema = mongoose.Schema;
 
 const ProductSchema = new Schema({
   _id: {type: Number},
+  href: { type: String },
   name: { type: String, default: 'product_name' },
+  category: {type : String},
   image: { type: String },
+  feature: { type: String },
   old_price: { type: Number },
   cur_price: { type: Number},
+  product_label: { type: String },
+  intallment: { type: Boolean },
+  label: { type: Boolean},
+  gift: { type: String},
+  pre_order: { type: String},
   // deletedAt: {type: Date, default: Date.now}
 },
   {

@@ -6,15 +6,29 @@ const Account = require("../models/Accounts");
 class APIController {
    index(req, res, next) {
       // serives
-      Promise.all([Product.find({}).count(), Product.find({}).handlePage(res)])
+      const categories = {
+         dtdd: "mobile",
+         laptop : "laptop"
+      }
+      let {category} = req.params
 
-         .then(([DocCount, products]) => {
-            const totalPage = Math.ceil(DocCount / res.locals._page.pageSize);
-            // res.json({products: util.multipleConvert(products)})
-            res.json({ products, totalPage });
+      category = categories[category]
+
+      Promise.all([Product.find({}).count(), Product.find({category: category}).handlePage(res)])
+
+         .then(([count, rows]) => {
+            res.json({ count, rows });
             return;
          })
-         .catch((err) => next(err));
+         .catch((err) => res.json("loi server"));
+   }
+   getOne(req, res, next) {
+      // serives
+      const {category, key} = req.params
+
+      console.log(category, key)
+      return;
+
    }
    login(req, res, next) {
       const username = req.body.username;
