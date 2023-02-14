@@ -14,7 +14,7 @@ class APIController {
 
       category = categories[category]
 
-      Promise.all([Product.find({}).count(), Product.find({category: category}).handlePage(res)])
+      Promise.all([Product.find({category: category}).count(), Product.find({category: category}).handlePage(res)])
 
          .then(([count, rows]) => {
             res.json({ count, rows });

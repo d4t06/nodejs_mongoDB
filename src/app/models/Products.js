@@ -42,9 +42,9 @@ ProductSchema.query.handleSort = function (req, res) {
 }
 
 ProductSchema.query.handlePage = function (res) {
-  const pageSize = res.locals._page.pageSize
-  const skipCount = (res.locals._page.curPage - 1) * pageSize
-
+  const pageSize = res.locals._page.curPage * 6
+  const skipCount = 0  // (res.locals._page.curPage - 1) * pageSize
+ 
   //thực hiện phân dữ liệu
   this.skip(skipCount)
   this.limit(pageSize)
