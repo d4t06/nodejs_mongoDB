@@ -5,15 +5,10 @@ const Account = require("../models/Accounts");
 
 class APIController {
    index(req, res, next) {
-      // serives
-      const categories = {
-         dtdd: "mobile",
-         laptop : "laptop"
-      }
-      let {category} = req.params
 
-      category = categories[category]
-
+      const {category} = req.params
+            
+      // service
       Promise.all([Product.find({category: category}).count(), Product.find({category: category}).handlePage(res)])
 
          .then(([count, rows]) => {
@@ -23,7 +18,7 @@ class APIController {
          .catch((err) => res.json("loi server"));
    }
    getOne(req, res, next) {
-      // serives
+      // service
       const {category, key} = req.params
 
       console.log(category, key)
