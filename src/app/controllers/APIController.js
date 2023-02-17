@@ -4,12 +4,14 @@ const Account = require("../models/Accounts");
 
 
 class APIController {
-   index(req, res, next) {
+   getProducts(req, res, next) {
 
-      const {category} = req.params
+      const query = req.query
+
+      console.log(query)
             
       // service
-      Promise.all([Product.find({category: category}).count(), Product.find({category: category}).handlePage(res)])
+      Promise.all([Product.find({...query}).count(), Product.find({...query}).handlePage(res)])
 
          .then(([count, rows]) => {
             res.json({ count, rows });

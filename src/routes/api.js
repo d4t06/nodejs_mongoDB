@@ -6,8 +6,8 @@ const apiController = require("../app/controllers/APIController")
 const autheMiddleware = require("../app/middlewares/authenticateMiddleware")
 
 
-router.get("/:category", apiController.index)
-router.get("/:category/:key", apiController.getOne)
+router.get("/", apiController.getProducts)
+// router.get("/:category/:key", apiController.getOne)
 
 
 module.exports = router
