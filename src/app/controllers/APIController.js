@@ -1,17 +1,18 @@
 // models
 const Product = require("../models/Products");
 const Account = require("../models/Accounts");
+const Detail = require("../models/Details")
 
 
 class APIController {
    getProducts(req, res, next) {
 
-      const query = req.query
+      const querys = req.query
 
-      console.log(query)
+      console.log(querys)
             
       // service
-      Promise.all([Product.find({...query}).count(), Product.find({...query}).handlePage(res)])
+      Promise.all([Product.find({...querys}).count(), Product.find({...querys}).handlePage(res)])
 
          .then(([count, rows]) => {
             res.json({ count, rows });
@@ -19,13 +20,28 @@ class APIController {
          })
          .catch((err) => res.json("loi server"));
    }
-   getOne(req, res, next) {
+   async getOne(req, res, next) {
       // service
-      const {category, key} = req.params
+      const {key} = req.params
+      console.log(key)
 
-      console.log(category, key)
-      return;
-
+      Product.findOne({
+         href: key,
+         $lookup:
+         {
+            from: Detail,
+            localField: "key",
+            foreignField: "href",
+            as: 'data'
+         }
+      })
+      .then(data => {
+         res.json(data)
+      })
+      .catch(error => {
+         console.log(error);
+         res.json("loi server");
+      })
    }
    login(req, res, next) {
       const username = req.body.username;

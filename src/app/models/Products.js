@@ -10,6 +10,7 @@ const ProductSchema = new Schema({
   _id: {type: Number},
   href: { type: String },
   name: { type: String, default: 'product_name' },
+  brand: {type : String},
   category: {type : String},
   image: { type: String },
   feature: { type: String },
@@ -42,7 +43,7 @@ ProductSchema.query.handleSort = function (req, res) {
 }
 
 ProductSchema.query.handlePage = function (res) {
-  const pageSize = res.locals._page.curPage * 6
+  const pageSize = res.locals.page.curPage * 6
   const skipCount = 0  // (res.locals._page.curPage - 1) * pageSize
  
   //thực hiện phân dữ liệu

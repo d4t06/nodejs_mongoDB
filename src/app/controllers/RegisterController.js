@@ -2,7 +2,7 @@ const jwt = require("jsonwebtoken");
 var passport = require("passport");
 const Account = require("../models/Accounts");
 var LocalStrategy = require("passport-local");
-const bcrypt = require("bcrypt");
+// const bcrypt = require("bcrypt");
 
 class RegisterController {
    index(req, res) {
@@ -36,20 +36,20 @@ class RegisterController {
    }
    Register(req, res, next) {
       const { username, password } = req.body;
-      bcrypt
-         .genSalt(10)
-         .then(result => {
-            // console.log(result)
-            // res.json(err)
-            // return
-            bcrypt.hash(password, result)
-            .then(result);
-            // if (err) res.json("gen Hash Error");
-            // return result            
-            res.json(hash)
-         // .then((hash) => res.json(hash));
-         })
-         .catch((err) => res.json("lỗi khi gen hash"));
+      // bcrypt
+      //    .genSalt(10)
+      //    .then(result => {
+      //       // console.log(result)
+      //       // res.json(err)
+      //       // return
+      //       bcrypt.hash(password, result)
+      //       .then(result);
+      //       // if (err) res.json("gen Hash Error");
+      //       // return result            
+      //       res.json(hash)
+      //    // .then((hash) => res.json(hash));
+      //    })
+      //    .catch((err) => res.json("lỗi khi gen hash"));
       return;
 
       const newAccount = new Account({ username: username, password: password });

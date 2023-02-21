@@ -1,14 +1,14 @@
 module.exports = function paginationMiddleware (req, res, next) {
-    res.locals._page = {
+    res.locals.page = {
         curPage: 1,
-        pageSize: 4,
+        pageSize: 6,
     };
 
-    if (req.query.hasOwnProperty("_page")) {
-        Object.assign(res.locals._page, {
-            curPage: parseInt(req.query._page) > 1 ? 
-            parseInt(req.query._page) : 
-            1,
+    if (req.query.hasOwnProperty("page")) {
+        Object.assign(res.locals.page, {
+            curPage: parseInt(req.query.page) > 1 ? 
+                parseInt(req.query.page) : 
+                1,
         })
     };
 
