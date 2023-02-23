@@ -7,12 +7,18 @@ const Detail = require("../models/Details")
 class APIController {
    getProducts(req, res, next) {
 
-      const querys = req.query
+      const {price, ...querys} = req.query
 
       console.log(querys)
+      
+      const [gThan, lThan] = price || [0, 50]
+
+      console.log(gThan, lThan)
             
       // service
-      Promise.all([Product.find({...querys}).count(), Product.find({...querys}).handlePage(res)])
+      Promise.all([
+         Product.find({...querys, cur_price: { $gte: gThan  * 1000000, $lte: lThan * 1000000}}).count(), 
+         Product.find({...querys, cur_price: { $gte: gThan, $lte: lThan * 1000000}}).handlePage(res)])
 
          .then(([count, rows]) => {
             res.json({ count, rows });
@@ -43,22 +49,15 @@ class APIController {
          res.json("loi server");
       })
    }
-   login(req, res, next) {
-      const username = req.body.username;
-      const password = req.body.password;
+   search(req, res, next) {
+      const {q} = req.query;
+
+      // console.log("/" + q + "/" + "i")
       
       // service
-      Account.findOne({ username: username, password: password })
-         .then((account) => {
-            console.log(account)
-            // res.json("Tìm tháy tài khoản, tiến hành đăng nhập")
-            if (account) {
-               req.session.isLogin = account;
-               res.redirect("http://localhost:3001/products");
-            }
-            else {
-               res.json('mat khau hoac tai khoan khong dung')
-            }
+      Product.find({ name: new RegExp(q, "i") }).limit(6)
+         .then((products) => {
+               res.json(products.length ? products : null)
          })
          .catch((err) => res.status(500).json("lối serve"));
    }

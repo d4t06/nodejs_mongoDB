@@ -1,4 +1,4 @@
-GET http://localhost:3000/api/dtdd?_page=1
+GET http://localhost:3000/api?category=dtdd&page=1&price=[1,3]
 
 
 ###
@@ -10,3 +10,9 @@ content-type: application/json
     "username": "datnh",
     "password": "dat123"
 }
+
+###
+GET http://localhost:3000/api/search?q=samsung
+
+###
+GET localhost:3000/api/category=dtdd&brand[]=Samsung&brand[]=Xiaomi
