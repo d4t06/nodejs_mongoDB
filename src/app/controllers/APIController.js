@@ -1,24 +1,25 @@
 // models
 const Product = require("../models/Products");
 const Account = require("../models/Accounts");
-const Detail = require("../models/Details")
-
+const Detail = require("../models/Details");
 
 class APIController {
    getProducts(req, res, next) {
-
-      const {price, ...querys} = req.query
-
-      console.log(querys)
       
-      const [gThan, lThan] = price || [0, 50]
+      const {price, column, type, ...querys } = req.query;
 
-      console.log(gThan, lThan)
-            
+      console.log("controller pass ", querys);
+      console.log(res.locals.sort)
+
+      const [gThan, lThan] = price || [0, 50];
+
+      console.log(gThan, lThan);
+
       // service
       Promise.all([
-         Product.find({...querys, cur_price: { $gte: gThan  * 1000000, $lte: lThan * 1000000}}).count(), 
-         Product.find({...querys, cur_price: { $gte: gThan, $lte: lThan * 1000000}}).handlePage(res)])
+         Product.find({ ...querys, cur_price: { $gte: gThan * 1000000, $lte: lThan * 1000000 } }).count(),
+         Product.find({ ...querys, cur_price: { $gte: gThan, $lte: lThan * 1000000 } }).handlePage(res).handleSort(res),
+      ])
 
          .then(([count, rows]) => {
             res.json({ count, rows });
@@ -28,38 +29,44 @@ class APIController {
    }
    async getOne(req, res, next) {
       // service
-      const {key} = req.params
-      console.log(key)
+      const { key } = req.params;
+      console.log(key);
 
       Product.findOne({
          href: key,
-         $lookup:
-         {
+         $lookup: {
             from: Detail,
             localField: "key",
             foreignField: "href",
-            as: 'data'
-         }
+            as: "data",
+         },
       })
-      .then(data => {
-         res.json(data)
-      })
-      .catch(error => {
-         console.log(error);
-         res.json("loi server");
-      })
-   }
-   search(req, res, next) {
-      const {q} = req.query;
-
-      // console.log("/" + q + "/" + "i")
-      
-      // service
-      Product.find({ name: new RegExp(q, "i") }).limit(6)
-         .then((products) => {
-               res.json(products.length ? products : null)
+         .then((data) => {
+            res.json(data);
          })
-         .catch((err) => res.status(500).json("lối serve"));
+         .catch((error) => {
+            console.log(error);
+            res.json("loi server");
+         });
+   }
+
+   search(req, res, next) {
+      let { q, page } = req.query;
+      if (!page) page = 1
+      console.log("search", q, page);
+
+      Promise.all([
+         Product.find({ name: new RegExp(q, "i") }).count(),
+         Product.find({ name: new RegExp(q, "i") }).limit(page * 8).handleSort(res),
+      ])
+
+         .then(([count, rows]) => {
+            res.json(rows.length ? { count, rows } : null);
+         })
+         .catch((err) => {
+            res.status(500).json("lối serve")
+            console.log(err);
+         });
    }
 }
 

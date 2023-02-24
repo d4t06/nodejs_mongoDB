@@ -1,17 +1,21 @@
-module.exports = function SortMiddleware ( req, res, next) {
-    res.locals._sort = {
-        enable: false,
-        type : 'desc',
-    };
+module.exports = function SortMiddleware(req, res, next) {
+   res.locals.sort = {
+      enable: false,
+      column: "name",
+      type: "desc",
+   };
 
-    if (req.query.hasOwnProperty("_sort")) {
-        const isValidType = ['asc', 'desc'].includes(req.query.type)
-        Object.assign(res.locals._sort, {
-            enable: true,
-            type: isValidType ? req.query.type : 'desc',
-            column: req.query.column
-        })
-    };
-    
-    next()
-}
+   if (req.query.hasOwnProperty("column")) {
+      console.log("has column");
+      const isValidType = ["asc", "desc"].includes(req.query.type);
+      const isValidColumn = ["cur_price"].includes(req.query.type);
+
+      Object.assign(res.locals.sort, {
+         type: true ? req.query.type : "desc",
+         column: true ? req.query.column : "name",
+         enable: true,
+      });
+   }
+
+   next();
+};

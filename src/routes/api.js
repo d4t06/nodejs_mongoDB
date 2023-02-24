@@ -2,9 +2,10 @@ const express = require('express')
 const router = express.Router()
 const apiController = require("../app/controllers/APIController")
 const paginationMiddleware = require("../app/middlewares/paginationMiddleware")
+const SortMiddleware = require('../app/middlewares/SortMiddleware')
 
 // api/
-router.get("/", paginationMiddleware, apiController.getProducts)
+router.get("/",SortMiddleware, paginationMiddleware, apiController.getProducts)
 
 router.get("/search", paginationMiddleware, apiController.search)
 // api/:category/:key
