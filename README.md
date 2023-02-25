@@ -15,3 +15,6 @@ Delete -> DELETE
 - Thêm search service
 - thêm filter by price
 - Thêm getAll không có thì trả về null
+
+### update thứ 7 25/2/2023
+- model query helper chạy sau controller

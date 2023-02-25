@@ -6,19 +6,19 @@ const Detail = require("../models/Details");
 class APIController {
    getProducts(req, res, next) {
       
-      const {price, column, type, ...querys } = req.query;
+      const {price, ...query } = req.query;
 
-      console.log("controller pass ", querys);
-      console.log(res.locals.sort)
+      console.log("controller pass ", query);
+      // console.log(res.locals.sort)
 
       const [gThan, lThan] = price || [0, 50];
 
-      console.log(gThan, lThan);
+      // console.log(gThan, lThan);
 
       // service
       Promise.all([
-         Product.find({ ...querys, cur_price: { $gte: gThan * 1000000, $lte: lThan * 1000000 } }).count(),
-         Product.find({ ...querys, cur_price: { $gte: gThan, $lte: lThan * 1000000 } }).handlePage(res).handleSort(res),
+         Product.find({ ...query, cur_price: { $gte: gThan * 1000000, $lte: lThan * 1000000 } }).count(),
+         Product.find({ ...query, cur_price: { $gte: gThan, $lte: lThan * 1000000 } }).handlePage(res).handleSort(res),
       ])
 
          .then(([count, rows]) => {

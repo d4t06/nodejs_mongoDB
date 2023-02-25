@@ -32,16 +32,11 @@ const ProductSchema = new Schema({
 //custom query helper
   // không được viết trùng tên với tên phương thức của query 
 ProductSchema.query.handleSort = function (res) {
-  // nếu bật chức năng sort
   if (res.locals.sort.enable) {
-    console.log("model pass");
-    // const {column, type, ... rest} = req.query
-    // req.query = rest
     return this.sort({
       [res.locals.sort.column] : res.locals.sort.type
     })
   }
-  // console.log(this)
   return this;
 }
 
