@@ -18,7 +18,7 @@ const ProductSchema = new Schema({
   cur_price: { type: Number},
   product_label: { type: String },
   intallment: { type: Boolean },
-  label: { type: Boolean},
+  label: { type: String},
   gift: { type: String},
   pre_order: { type: String},
   // deletedAt: {type: Date, default: Date.now}

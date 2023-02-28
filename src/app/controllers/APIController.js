@@ -30,7 +30,7 @@ class APIController {
    async getOne(req, res, next) {
       // service
       const { key } = req.params;
-      console.log(key);
+      console.log(" key = ", key);
 
       Product.findOne({
          href: key,
