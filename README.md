@@ -18,3 +18,6 @@ Delete -> DELETE
 
 ### update thứ 7 25/2/2023
 - model query helper chạy sau controller
+
+### update thứ 5 2/3/2023
+- Mặc định sẽ là không có sort

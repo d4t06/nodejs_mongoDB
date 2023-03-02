@@ -5,7 +5,7 @@ module.exports = function SortMiddleware(req, res, next) {
       type: "desc",
    };
 
-   if (req.query.hasOwnProperty("column")) {
+   if (req.query.column) {
       console.log("sort middleware pass");
       const isValidType = ["asc", "desc"].includes(req.query.type);
       const isValidColumn = ["cur_price"].includes(req.query.column);
@@ -18,6 +18,12 @@ module.exports = function SortMiddleware(req, res, next) {
 
       const {column, type, ...rest} = req.query
       req.query = rest
+   } else {
+      Object.assign(res.locals.sort, {
+         type: "",
+         column: "",
+         enable: false,
+      });
    }
 
    next();

@@ -7,11 +7,11 @@ class APIController {
    getProducts(req, res, next) {
       const { price, ...query } = req.query;
 
-      console.log("controller pass ", query);
       // console.log(res.locals.sort)
-
+      
       const [gThan, lThan] = price || [0, 50];
-
+      
+      console.log("controller pass ", {...query, price} );
       // console.log(gThan, lThan);
 
       // service

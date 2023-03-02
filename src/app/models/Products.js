@@ -32,6 +32,7 @@ const ProductSchema = new Schema({
 //custom query helper
   // không được viết trùng tên với tên phương thức của query 
 ProductSchema.query.handleSort = function (res) {
+  console.log('sort :', res.locals.sort);
   if (res.locals.sort.enable) {
     return this.sort({
       [res.locals.sort.column] : res.locals.sort.type
