@@ -34,6 +34,11 @@ const ProductSchema = new Schema({
 ProductSchema.query.handleSort = function (res) {
   console.log('sort :', res.locals.sort);
   if (res.locals.sort.enable) {
+    if (res.locals.sort.column === 'intallment') {
+      const result = this.where({intallment: true})
+      // if (!result) return []
+      return result 
+    }
     return this.sort({
       [res.locals.sort.column] : res.locals.sort.type
     })

@@ -21,3 +21,6 @@ Delete -> DELETE
 
 ### update thứ 5 2/3/2023
 - Mặc định sẽ là không có sort
+
+### update thứ 6 3/3/2023
+- Thêm sort theo trả góp
