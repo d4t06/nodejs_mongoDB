@@ -16,12 +16,6 @@ const authMiddleware = require("../app/middlewares/authenticateMiddleware");
 const route = function (app) {
    // test
    app.use("/api", apiRouter)
-
-   app.get("/users", (req, res) => {
-      Account.find({})
-      .then(data => res.json(data))
-      .catch(err => res.status(500).json(err))
-   })
    
    app.get("/logout",authMiddleware.logoutHandle, loginController.logout);
 

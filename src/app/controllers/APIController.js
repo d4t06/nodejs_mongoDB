@@ -1,5 +1,6 @@
 // models
 const Product = require("../models/Products");
+const jwt = require("jsonwebtoken");
 const Account = require("../models/Accounts");
 const Detail = require("../models/Details");
 
@@ -82,6 +83,37 @@ class APIController {
             console.log(err);
          });
    }
+
+   async login(req, res) {
+      const {username, password} = req.body
+
+      console.log(req.body);
+      if (!username || !password) return res.status(400).json("missing payload")
+   
+         const account = await Account.findOne({username: username, password: password})
+
+         const accessToken = jwt.sign({id: account._id }, process.env.SESSION_SECRET)
+
+         res.json({role: account.role, accessToken: accessToken})
+
+
+   }
+   async register(req, res) {
+      const {username, password} = req.body
+
+      console.log(req.body);
+
+         const account = await Account.findOne({username: username})
+
+         if (account) return res.status(409).json("username taken")
+
+         const newAccount = new Account({ username: username, password: password });
+
+         const response = await newAccount.save()
+         if (response) return res.status(200).json("dang ky thanh cong")
+      
+   }
+   
 }
 
 module.exports = new APIController();
